@@ -1,0 +1,28 @@
+.sidebar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    z-index: 100;
+    width: 280px;
+    padding: 20px;
+    background-color: #f8f9fa; /* Light gray background color */
+    border-right: 1px solid #e9ecef; /* Lighter border color */
+  
+    transition: all 0.3s ease; /* Smooth transition for width changes */
+  }
+  
+  .sidebar:hover {
+    width: 280px; /* Ensure sidebar stays expanded on hover */
+  }
+  
+  @media (max-width: 768px) {
+    .sidebar {
+      width: 60px; /* Collapse sidebar to 60px width on smaller screens */
+    }
+  
+    .sidebar:hover {
+      width: 280px; /* Expand sidebar to full width on hover */
+    }
+  }
+  
