@@ -11,6 +11,8 @@ import { DashboardComponent } from './pages/dashboard/dashboard.component';
 import { NavbarComponent } from './layout/navbar/navbar.component';
 import { FooterComponent } from './layout/footer/footer.component';
 import { SidebarComponent } from './layout/sidebar/sidebar.component';
+import { HttpClientModule } from '@angular/common/http';
+import { CreateContentComponent } from './pages/create-content/create-content.component';
 
 @NgModule({
   declarations: [
@@ -21,12 +23,14 @@ import { SidebarComponent } from './layout/sidebar/sidebar.component';
     DashboardComponent,
     NavbarComponent,
     FooterComponent,
-    SidebarComponent
+    SidebarComponent,
+    CreateContentComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     ReactiveFormsModule,
+    HttpClientModule
     
   ],
   providers: [],

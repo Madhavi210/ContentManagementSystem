@@ -1,0 +1,56 @@
+<div class="container-fluid bg-image">
+    <div class="row justify-content-center align-items-center full-height">
+      <div class="col-md-4">
+        <div class="card">
+          <div class="card-body">
+            <h2 class="text-center mb-4">Create Content</h2>
+            <form [formGroup]="contentForm" (ngSubmit)="onSubmit()" enctype="multipart/form-data">
+              <!-- Title Input -->
+              <div class="form-group p-2">
+                <label for="title" class="mb-2 font-weight-bold">Title</label>
+                <input type="text" id="title" formControlName="title" class="form-control" placeholder="Enter your title">
+                <div *ngIf="contentForm.get('title')?.errors && (contentForm.get('title')?.touched || contentForm.get('title')?.dirty)" class="text-danger mt-1">
+                  <div *ngIf="contentForm.get('title')?.hasError('required')">Title is required.</div>
+                </div>
+              </div>
+  
+              <!-- Body Input -->
+              <div class="form-group p-2">
+                <label for="body" class="mb-2 font-weight-bold">Body</label>
+                <textarea id="body" formControlName="body" class="form-control" placeholder="Enter your body"></textarea>
+                <div *ngIf="contentForm.get('body')?.errors && (contentForm.get('body')?.touched || contentForm.get('body')?.dirty)" class="text-danger mt-1">
+                  <div *ngIf="contentForm.get('body')?.hasError('required')">Body is required.</div>
+                </div>
+              </div>
+
+            <!-- UploadedBy Input -->
+            <div class="form-group p-2">
+                <label for="uploadedBy" class="mb-2 font-weight-bold">Uploaded By</label>
+                <input type="text" id="uploadedBy" formControlName="uploadedBy" class="form-control" placeholder="Enter uploaded by">
+                <div *ngIf="contentForm.get('uploadedBy')?.errors && (contentForm.get('uploadedBy')?.touched || contentForm.get('uploadedBy')?.dirty)" class="text-danger mt-1">
+                  <div *ngIf="contentForm.get('uploadedBy')?.hasError('required')">Uploaded by is required.</div>
+                </div>
+              </div>
+  
+              <!-- File Input -->
+              <div class="form-group p-2 mt-2">
+                <label for="file" class="mb-2 font-weight-bold">File &nbsp;</label>
+                <input type="file" id="file" (change)="onFileSelected($event)" class="form-control-file">
+                <div *ngIf="contentForm.get('file')?.errors && (contentForm.get('file')?.touched || contentForm.get('body')?.dirty)" class="text-danger mt-1">
+                    <div *ngIf="contentForm.get('file')?.hasError('required')">file is required.</div>
+                  </div>
+                <!-- You can handle file selection logic in your component -->
+              </div>
+  
+              <!-- Submit Button -->
+              <div class="text-center m-3">
+                <button type="submit" [disabled]="!contentForm.valid" class="btn btn-primary">Submit</button>
+              </div>
+            </form>
+  
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  

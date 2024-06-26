@@ -11,7 +11,7 @@ export default class UserRouter {
 
     private routes(){
         // POST /api/users - Create a new user
-        this.router.post("/add", UserController.createUser);
+        this.router.post("/", UserController.createUser);
 
         // GET /api/users/:id - Get user by ID
         this.router.get("/:id", Authentication.authUser, UserController.getUserById);

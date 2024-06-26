@@ -7,12 +7,10 @@ import { Component } from '@angular/core';
 })
 export class NavbarComponent {
 
-  sidebarVisible: boolean = false;
+  sidebarActive: boolean = true;
 
-  constructor() { }
-
-  toggleSidebar() {
-    this.sidebarVisible = !this.sidebarVisible;
+  toggleSidebar(): void {
+    this.sidebarActive = !this.sidebarActive;
   }
 
 }

@@ -1,84 +1,23 @@
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-}
-
-body {
-  font-family: Arial, sans-serif;
-}
-
-header {
-  background-color: #333;
-  color: #fff;
-  padding: 10px 20px;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-}
-
-.navbar-brand {
-  display: flex;
-  align-items: center;
-}
-
-.navbar-brand a {
-  color: #fff;
-  text-decoration: none;
-  font-weight: bold;
-  margin-left: 10px;
-}
-
-.navbar-nav {
-  list-style-type: none;
-  display: flex;
-}
-
-.navbar-nav li {
-  margin-right: 20px;
-}
-
-.navbar-nav a {
-  color: #fff;
-  text-decoration: none;
-}
-
+// You can add custom styling here if needed
 .sidebar {
   position: fixed;
-  left: -250px;
   top: 0;
-  height: 100%;
+  bottom: 0;
+  left: -250px; /* Initial position outside the viewport */
   width: 250px;
-  background-color: #222;
-  transition: left 0.3s ease;
+  background-color: #f8f9fa; /* Bootstrap light background color */
+  transition: all 0.3s ease;
 }
 
-.sidebar ul {
-  list-style-type: none;
-  padding: 20px;
+.sidebar.active {
+  left: 0; /* Move sidebar into viewport when active */
 }
 
-.sidebar ul li {
-  margin-bottom: 10px;
+.sidebar-sticky {
+  overflow-y: auto;
+  height: 100%;
 }
 
-.sidebar ul li a {
-  color: #fff;
-  text-decoration: none;
-  font-size: 16px;
-}
-
-.content {
-  margin-left: 20px;
-  padding: 20px;
-}
-
-@media (max-width: 768px) {
-  .sidebar {
-      left: -100%;
-  }
-
-  .content {
-      margin-left: 0;
-  }
+.navbar-toggler {
+  margin-right: 16px; /* Adjust spacing between toggle button and brand */
 }

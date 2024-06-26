@@ -1,0 +1,51 @@
+/* Adjust padding for body to accommodate sidebar */
+.body-pd {
+    padding-left: 72px; /* Adjust as per your sidebar width */
+  }
+  
+  @media screen and (max-width: 992px) {
+    .body-pd {
+      padding-left: 0; /* Remove padding on smaller screens */
+    }
+  }
+  
+  /* Ensure sidebar remains fixed position */
+  .l-navbar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 72px; /* Adjust sidebar width */
+    height: 100vh;
+    background-color: #343a40; /* Sidebar background color */
+    padding: 1rem 0; /* Padding for sidebar items */
+    transition: width 0.3s ease; /* Smooth transition for width change */
+    z-index: 1000; /* Ensure sidebar is above other content */
+  }
+  
+  @media screen and (max-width: 992px) {
+    .l-navbar {
+      width: 0; /* Collapse sidebar on smaller screens */
+      padding: 0;
+    }
+  
+    .show {
+      width: 250px; /* Width when sidebar is expanded */
+    }
+  }
+  
+  /* Ensure content area is correctly aligned */
+  .col-lg-10 {
+    margin-left: 72px; /* Adjust margin to match sidebar width */
+  }
+  
+  @media screen and (max-width: 992px) {
+    .col-lg-10 {
+      margin-left: 0; /* Remove margin on smaller screens */
+    }
+  }
+
+  .contentImg{
+    max-width: 100%;
+    width: 100px;
+  }
+  

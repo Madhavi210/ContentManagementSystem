@@ -1,1 +1,60 @@
-<p>dashboard works!</p>
+<section >
+    <app-navbar></app-navbar>
+
+    <!-- Content Area -->
+    <div class="container-fluid m-2">
+        <div class="row m-4">
+        <div class="col">
+            <button class="btn btn-success" routerLink="/createContent">Create New Content</button>
+        </div>
+        </div>
+
+        <!-- Display Content Cards -->
+        <div class="row">
+        <div class="col-md-3 mb-2" *ngFor="let content of contents">
+            <div class="card">
+                <div class="card-body">
+                  <h5 class="card-title">{{ content.title }}</h5>
+                  <p class="card-text">{{ content.body }}</p>
+              
+                  <!-- Media Display -->
+                  <div *ngIf="content.media">
+                    <!-- Image -->
+                    <img *ngIf="isImage(content.media.mimetype)" [src]="getMediaUrl(content.media.path)" class="card-img-top img-fluid contentImg" alt="Image">
+              
+                    <!-- Video -->
+                    <video *ngIf="isVideo(content.media.mimetype)" [src]="getMediaUrl(content.media.path)" controls class="w-100">
+                      Your browser does not support the video tag.
+                    </video>
+              
+                    <!-- Audio -->
+                    <audio *ngIf="isAudio(content.media.mimetype)" [src]="getMediaUrl(content.media.path)" controls class="w-100">
+                      Your browser does not support the audio tag.
+                    </audio>
+              
+                    <!-- PDF -->
+                    <object *ngIf="isPdf(content.media.mimetype)" [data]="getMediaUrl(content.media.path)" type="{{ content.media.mimetype }}" class="w-100" height="500px">
+                      <p>Your browser does not support PDFs. <a [href]="getMediaUrl(content.media.path)" target="_blank">Download the PDF</a> instead.</p>
+                    </object>
+                  </div>
+              
+                  <!-- Download button for text and XML files -->
+                  <div *ngIf="content.media && (isText(content.media.mimetype) || isXml(content.media.mimetype))">
+                    <a [href]="getMediaUrl(content.media.path)" class="btn btn-primary" target="_blank">
+                      Download {{ content.media?.filename }}
+                    </a>
+                  </div>
+              
+                  <!-- Delete button -->
+                  <button (click)="onDeleteContent(content._id!)" class="btn btn-danger mt-2">Delete</button>
+                </div>
+              </div>
+              
+        </div>
+        </div>
+    </div>
+  
+    <!-- Footer -->
+      <app-footer></app-footer>
+  </section>
+  

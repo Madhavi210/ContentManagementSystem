@@ -62,7 +62,7 @@ export default class UserService {
             return users.map(user => user.toObject());
     }
 
-    public static async login (email:string, password:string,session:ClientSession):Promise<string>{
+    public static async login (email:string, password:string,session:ClientSession):Promise<object>{
         const user = await User.findOne({email: email}).session(session);
         if (!user) {
             throw new AppError(
@@ -87,7 +87,12 @@ export default class UserService {
             expiresIn: "10h",
           });
           user.token = token;
+          
           await user.save({ session });
-          return user.token;
+          return {
+            token: user.token,
+            id: user._id,
+            role: user.role
+          };
     }
 }
