@@ -1,23 +1,57 @@
-// You can add custom styling here if needed
-.sidebar {
-  position: fixed;
-  top: 0;
-  bottom: 0;
-  left: -250px; /* Initial position outside the viewport */
-  width: 250px;
-  background-color: #f8f9fa; /* Bootstrap light background color */
-  transition: all 0.3s ease;
+
+@import "/src/assets/scss/variable";
+
+.navbar {
+  background-color: $primary; 
+  padding: 10px;
 }
 
-.sidebar.active {
-  left: 0; /* Move sidebar into viewport when active */
+.navbar-brand {
+  color: $blue; 
+  font-size: 21px;
 }
 
-.sidebar-sticky {
-  overflow-y: auto;
-  height: 100%;
+.nav-link {
+  color: $offwhite; 
+  font-size: 17px;
+}
+.nav-link:hover{ 
+  color: $secondary;
 }
 
 .navbar-toggler {
-  margin-right: 16px; /* Adjust spacing between toggle button and brand */
+  margin-right: 16px; 
+  border-color: $offwhite; 
+  color: $offwhite; 
 }
+
+.navbar-toggler-icon {
+  background-color: $offwhite; 
+}
+.navbar-collapse {
+  background-color: $primary; 
+}
+
+.navbar-nav {
+  .nav-link {
+      color: $offwhite;
+      &.active {
+          color: $blue; 
+      }
+  }
+}
+.fas {
+  color: $blue;
+}
+
+.dropdown-menu {
+  background-color: $offwhite; 
+  .dropdown-item {
+    color: $default; 
+    &:hover {
+      background-color: $blue;
+      color: $white; 
+    }
+  }
+}
+

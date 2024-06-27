@@ -1,26 +1,26 @@
-/* Reset default margin and padding */
+@import "/src/assets/scss/variable";
+
 * {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
 }
 
-/* Basic styling for the footer */
+
 .footer {
-    background-color: #333;
-    color: #fff;
+    background-color: $primary;
+    color: $offwhite;
     padding: 20px;
     text-align: center;
     position: relative;
 }
 
-/* Styling for the bottom of the footer */
 .footer-bottom {
     position: absolute;
     bottom: 0;
     width: 100%;
     padding: 10px 0;
-    background-color: #222;
+    background-color: $primary /* Slightly darker background */
 }
 
 .footer-bottom p {
@@ -30,16 +30,29 @@
 
 /* Responsive design */
 @media (max-width: 768px) {
-    .footer-content {
-        flex-direction: column;
+    .footer {
+        padding: 15px;
     }
+}
 
-    .social-icons {
-        margin-top: 20px;
-    }
+/* Custom colors */
+.text-muted {
+    color: $blue; /* Light blue for copyright text */
+}
 
-    .social-icons img {
-        width: 40px;
-        height: 40px;
-    }
+/* Social icons */
+.social-icons {
+    margin-top: 10px;
+}
+
+.social-icons a {
+    display: inline-block;
+    margin: 0 5px;
+    color: $blue; /* White color for icons */
+    font-size: 20px;
+    transition: color 0.3s ease;
+}
+
+.social-icons a:hover {
+    color: $offwhite; /* Light blue on hover */
 }

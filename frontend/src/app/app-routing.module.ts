@@ -6,14 +6,18 @@ import { RegisterComponent } from './pages/auth/register/register.component';
 import { NotFoundComponent } from './pages/not-found/not-found.component';
 import { DashboardComponent } from './pages/dashboard/dashboard.component';
 import { CreateContentComponent } from './pages/create-content/create-content.component';
+import { authGuardService } from './authentication/auth.guard';
+import { CreteUserComponent } from './pages/crete-user/crete-user.component';
+import { ManageUsersComponent } from './pages/manage-users/manage-users.component';
 
 const routes: Routes = [
   {path:'', redirectTo:'/register', pathMatch:'full' },
-  {path:'navbar', component:NavbarComponent},
   {path:"login", component:LoginComponent},
   {path: 'register', component:RegisterComponent},
-  {path:"dashboard", component:DashboardComponent},
-  {path:'createContent', component:CreateContentComponent},
+  {path:"dashboard", component:DashboardComponent, canActivate:[authGuardService]},
+  {path:'createContent', component:CreateContentComponent,canActivate:[authGuardService]},
+  {path:'createUser', component: CreteUserComponent},
+  {path: 'manageUser', component: ManageUsersComponent},
   {path: '**', component:NotFoundComponent}
 ];
 

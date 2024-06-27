@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable, catchError, tap, throwError } from 'rxjs';
 import { IUser } from '../core/model/user.model';
+import { Router } from '@angular/router';
 @Injectable({
   providedIn: 'root'
 })
@@ -9,7 +10,7 @@ export class LoginService {
 
   private apiUrl = 'http://localhost:3000/api/user';
   private isAuthenticated: Boolean = false;
-  constructor(private http:HttpClient) { }
+  constructor(private http:HttpClient, private router:Router) { }
   private token?:string | null = null;
   private role?:string | null = null;
   private userId? : string | null = null
@@ -56,6 +57,14 @@ export class LoginService {
    
   isLoggedIn(){
     return this.isAuthenticated;
+  }
+
+  logout(): void {
+    localStorage.removeItem('token');
+    localStorage.removeItem('userId');
+    localStorage.removeItem('role');
+    this.isAuthenticated = false;
+    this.router.navigate(['/login'])
   }
 
 }

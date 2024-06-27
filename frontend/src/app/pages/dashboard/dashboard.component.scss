@@ -1,4 +1,10 @@
-/* Adjust padding for body to accommodate sidebar */
+@import "/src/assets/scss/variable";
+
+
+.deshboard{
+  background-color: $offwhite;
+}
+
 .body-pd {
     padding-left: 72px; /* Adjust as per your sidebar width */
   }

@@ -102,5 +102,23 @@ export default class UserClontroller {
         }
     }
 
+    public static async logout(req: Request, res: Response, next: NextFunction): Promise<void> {
+        const session = await mongoose.startSession();
+        await session.startTransaction();
+        try {
+            const { userId } = req.params;
+            const user = await UserService.logout(userId, session);
+            console.log(user,"logout");
+            
+            await session.commitTransaction();
+            await session.endSession();
+            res.status(StatusCode.OK).json({user});
+        } catch (error:any) {
+            await session.abortTransaction();
+            await session.endSession();
+            next(error)
+        }
+    }
+
 }
 

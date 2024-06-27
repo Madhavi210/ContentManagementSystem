@@ -5,6 +5,7 @@ import Content from "../models/content.model";
 import { IContent, IMedia } from "../interface/content.interface";
 import AppError from "../utils/errorHandler";
 import StatusConstants from "../constant/statusConstant";
+import { Express } from "express";
 
 export default class ContentService {
   public static async createContent(

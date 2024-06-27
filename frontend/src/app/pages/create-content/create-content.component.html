@@ -15,13 +15,14 @@
               </div>
   
               <!-- Body Input -->
-              <div class="form-group p-2">
+              <div class="form-group p-2 ">
                 <label for="body" class="mb-2 font-weight-bold">Body</label>
-                <textarea id="body" formControlName="body" class="form-control" placeholder="Enter your body"></textarea>
-                <div *ngIf="contentForm.get('body')?.errors && (contentForm.get('body')?.touched || contentForm.get('body')?.dirty)" class="text-danger mt-1">
-                  <div *ngIf="contentForm.get('body')?.hasError('required')">Body is required.</div>
+                <angular-editor formControlName="htmlContent" [config]="config"></angular-editor>
+                  <!-- <textarea id="body" formControlName="body" class="form-control" placeholder="Enter your body"></textarea> -->
+                  <div *ngIf="contentForm.get('body')?.errors && (contentForm.get('body')?.touched || contentForm.get('body')?.dirty)" class="text-danger mt-1">
+                    <div *ngIf="contentForm.get('body')?.hasError('required')">Body is required.</div>
+                  </div>
                 </div>
-              </div>
 
             <!-- UploadedBy Input -->
             <div class="form-group p-2">
@@ -44,8 +45,10 @@
   
               <!-- Submit Button -->
               <div class="text-center m-3">
-                <button type="submit" [disabled]="!contentForm.valid" class="btn btn-primary">Submit</button>
+                <button type="submit" [disabled]="!contentForm.valid" class="btn fs-5 m-2 btn-primary">Submit</button>
+                <button type="button" class="btn fs-5 btn-secondary" routerLink="/dashboard">Cancel</button>
               </div>
+
             </form>
   
           </div>

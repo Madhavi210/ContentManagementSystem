@@ -1,0 +1,54 @@
+<div class="container-fluid bg-image">
+    <div class="row justify-content-center align-items-center full-height">
+      <div class="col-md-4">
+        <div class="card">
+          <div class="card-body">
+            <h2 class="text-center mb-4">Create User</h2>
+            <form [formGroup]="userForm" (ngSubmit)="onSubmit()">
+              <div class="form-group p-2">
+                <label for="username" class="mb-2 font-weight-bold">Username</label>
+                <input type="text" id="username" formControlName="username" class="form-control" placeholder="Enter username">
+                <div *ngIf="userForm.get('username')?.errors && (userForm.get('username')?.touched || userForm.get('username')?.dirty)" class="text-danger mt-1">
+                  <div *ngIf="userForm.get('username')?.hasError('required')">Username is required.</div>
+                </div>
+              </div>
+  
+              <div class="form-group p-2">
+                <label for="email" class="mb-2 font-weight-bold">Email</label>
+                <input type="text" id="email" formControlName="email" class="form-control" placeholder="Enter email">
+                <div *ngIf="userForm.get('email')?.errors && (userForm.get('email')?.touched || userForm.get('email')?.dirty)" class="text-danger mt-1">
+                  <div *ngIf="userForm.get('email')?.hasError('required')">Email is required.</div>
+                  <div *ngIf="userForm.get('email')?.hasError('email')">Invalid email format.</div>
+                </div>
+              </div>
+  
+              <div class="form-group p-2">
+                <label for="password" class="mb-2 font-weight-bold">Password</label>
+                <input type="password" id="password" formControlName="password" class="form-control" placeholder="Enter password">
+                <div *ngIf="userForm.get('password')?.errors && (userForm.get('password')?.touched || userForm.get('password')?.dirty)" class="text-danger mt-1">
+                  <div *ngIf="userForm.get('password')?.hasError('required')">Password is required.</div>
+                  <div *ngIf="userForm.get('password')?.hasError('minlength')">Password must be at least 6 characters long.</div>
+                </div>
+              </div>
+  
+              <div class="form-group p-2">
+                <label for="role" class="mb-2 font-weight-bold">Role</label>
+                <select id="role" formControlName="role" class="form-control">
+                  <option value="admin">Admin</option>
+                  <option value="editor">Editor</option>
+                  <option value="viewer">Viewer</option>
+                </select>
+              </div>
+  
+              <div class="text-center m-3">
+                <button type="submit" [disabled]="!userForm.valid" class="btn fs-5 btn-primary m-2">Create User</button>
+                <button type="reset" class="btn fs-5 btn-secondary">Reset</button>
+              </div>
+              
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  

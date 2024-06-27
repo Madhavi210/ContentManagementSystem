@@ -7,6 +7,8 @@ import AppError from "../utils/errorHandler";
 import StatusConstants from "../constant/statusConstant";
 import { IMedia } from "../interface/content.interface";
 import { StatusCode } from "../enum/statusCode";
+import { Express} from "express";
+
 
 export default class ContentController {
   public static async createContent(req: Request, res: Response, next: NextFunction): Promise<void> {
@@ -19,9 +21,7 @@ export default class ContentController {
     const file = req.file as Express.Multer.File; // Type assertion to Multer.File
     if (!file) {
       throw new AppError('File not uploaded', StatusCode.BAD_REQUEST);
-    }
-    console.log(req.file);
-    
+    }    
 
     const session = await mongoose.startSession();
     session.startTransaction();

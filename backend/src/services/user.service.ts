@@ -95,4 +95,14 @@ export default class UserService {
             role: user.role
           };
     }
+
+    public static async logout(userId:string, session:ClientSession):Promise<void>{
+        const updatedUser = await User.findByIdAndUpdate(userId, {token:''}, {new: true}).session(session)
+        console.log(updatedUser);  //null
+        
+        if (!updatedUser) {
+          throw new AppError('User not found', 404);
+        }
+        return updatedUser.toObject();
+    }
 }

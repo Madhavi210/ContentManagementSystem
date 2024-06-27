@@ -28,6 +28,7 @@ export default class UserRouter {
 
         // POST /api/users/login - User login
         this.router.post("/login", UserController.login);
+        this.router.post("/logout/:id", UserController.logout);
     }
 
     public getRouter(){

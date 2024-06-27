@@ -1,9 +1,10 @@
-import { Component } from '@angular/core';
+import { AfterViewInit, Component, OnInit , ElementRef, ViewChild } from '@angular/core';
 import { Title } from '@angular/platform-browser';
 import { FormGroup,FormBuilder } from '@angular/forms';
 import { Validators } from '@angular/forms';
 import { ContentService } from 'src/app/core/service/content.service';
 import { Router } from '@angular/router';
+import { AngularEditorConfig } from '@kolkov/angular-editor';
 
 @Component({
   selector: 'app-create-content',
@@ -63,4 +64,33 @@ export class CreateContentComponent {
       });
     }
   }
+
+  config: AngularEditorConfig = {
+    editable: true,
+    spellcheck: true,
+    minHeight: '5rem',
+    maxHeight: '15rem',
+    placeholder: 'Enter text here...',
+    translate: 'no',
+    sanitize: false,
+    toolbarPosition: 'top',
+    defaultFontName: 'Arial',
+    customClasses: [
+      {
+        name: 'quote',
+        class: 'quote',
+      },
+      {
+        name: 'redText',
+        class: 'redText'
+      },
+      {
+        name: 'titleText',
+        class: 'titleText',
+        tag: 'h1',
+      },
+    ]
+  };
+
+
 }
