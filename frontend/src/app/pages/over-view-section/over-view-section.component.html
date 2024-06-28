@@ -5,13 +5,13 @@
             <div class="col-md-4">
                 <div class="dashboard-card ">
                     <h3>User List</h3>
-                    <p>100</p>
+                    <p>{{totalUsers}}</p>
                 </div>
             </div>
             <div class="col-md-4 ">
                 <div class="dashboard-card">
                     <h3>Total Media Items</h3>
-                    <p>111</p>
+                    <p>{{totalContents}}</p>
                 </div>
             </div>
             <div class="col-md-4  ">
@@ -26,3 +26,19 @@
         </div>
     </div>
 </div>
+
+<!-- <div>
+    <h2>Total Users: {{ totalUsers }}</h2>
+    <ul>
+      <li *ngFor="let user of users">
+        {{ user.username }}
+      </li>
+    </ul>
+    
+    <h2>Total Content: {{ totalContent }}</h2>
+    <ul>
+      <li *ngFor="let item of content">
+        {{ item.title }}
+      </li>
+    </ul>
+  </div> -->

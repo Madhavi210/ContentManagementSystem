@@ -5,7 +5,8 @@ import Content from "../models/content.model";
 import { IContent, IMedia } from "../interface/content.interface";
 import AppError from "../utils/errorHandler";
 import StatusConstants from "../constant/statusConstant";
-import { Express } from "express";
+import { Express , Request, Response} from "express";
+import multer from 'multer';
 
 export default class ContentService {
   public static async createContent(
@@ -65,7 +66,10 @@ export default class ContentService {
     }
   }
 
-  public static async getAllContent(): Promise<IContent[]> {
-    return Content.find().populate("uploadedBy").exec();
+  public static async getAllContent(): Promise<{ content: IContent[], totalCount: number }> {
+    const allContent = await Content.find().populate('uploadedBy').exec();
+    const totalCount = await Content.countDocuments(); // Get total count of documents
+    return { content: allContent, totalCount };
   }
+  
 }

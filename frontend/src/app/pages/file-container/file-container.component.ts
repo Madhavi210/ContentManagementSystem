@@ -4,7 +4,7 @@ import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
 import { ContentService } from 'src/app/core/service/content.service';
 import { FileServiceService } from 'src/app/core/service/file-service.service';
 import Swal from 'sweetalert2';
-
+import { IContent } from 'src/app/core/model/content.model';
 @Component({
   selector: 'app-file-container',
   templateUrl: './file-container.component.html',
@@ -17,6 +17,7 @@ export class FileContainerComponent implements OnInit {
   videoAudioFiles: any[] = [];
   userId:string | null = null; 
   userRole: string | null = '';
+  totalContent: number = 0;
 
   constructor(private contentService: ContentService, private sanitizer: DomSanitizer){}
 
@@ -28,10 +29,14 @@ export class FileContainerComponent implements OnInit {
 
   fetchContent():void {
     this.contentService.getContent().subscribe(
-      content => {
-        this.pdfFiles = content.filter(item => item.media?.mimetype === 'application/pdf');
-        this.imageFiles = content.filter(item => item.media?.mimetype.startsWith('image/'));
-        this.videoAudioFiles = content.filter(item => item.media?.mimetype.startsWith('audio/') || item.media?.mimetype.startsWith('video/'));
+      data => {
+        if (Array.isArray(data.content)) {
+          this.pdfFiles = data.content.filter(item => item.media?.mimetype === 'application/pdf');
+          this.imageFiles = data.content.filter(item => item.media?.mimetype.startsWith('image/'));
+          this.videoAudioFiles = data.content.filter(item => item.media?.mimetype.startsWith('audio/') || item.media?.mimetype.startsWith('video/'));
+        } else{
+          console.error('Invalid data structure returned from server:', data.content);
+        }
       },
       error => {
         console.error("Error fetching content:", error);
@@ -40,7 +45,7 @@ export class FileContainerComponent implements OnInit {
   }
 
   isImage(mimetype: string): boolean {
-    return (mimetype.startsWith('image') || mimetype === 'image/jpeg');
+    return (mimetype.startsWith('image') );
   }
 
   isVideo(mimetype: string): boolean {
@@ -56,12 +61,13 @@ export class FileContainerComponent implements OnInit {
   }
 
   getMediaUrl(relativePath: string): SafeResourceUrl {
-    const fullUrl = `http://localhost:3000/${relativePath}`; // Adjust URL as per your backend setup
+    const fullUrl = `http://localhost:3000/uploads/${relativePath}`; // Adjust URL as per your backend setup
+    console.log(fullUrl,"fullurl");
     return this.sanitizer.bypassSecurityTrustResourceUrl(fullUrl);
   }
 
   downloadFile(relativePath: string, filename: string): void {
-    const fullUrl = `http://localhost:3000/${relativePath}`; // Adjust URL as per your backend setup
+    const fullUrl = `http://localhost:3000/uploads/${filename}`; // Adjust URL as per your backend setup
     const anchor = document.createElement('a');
     anchor.href = fullUrl;
     anchor.download = filename;

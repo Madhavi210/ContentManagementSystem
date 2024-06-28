@@ -1,0 +1,67 @@
+@import "/src/assets/scss/variable";
+
+.container-fluid {
+  margin-top: 20px;
+}
+
+h2 {
+  color: $primary;
+  margin-bottom: 20px;
+}
+
+.table {
+  width: 100%;
+  margin-bottom: 1rem;
+  background-color: $offwhite;
+  color: $default;
+  border: 1px solid $primary;
+  border-collapse: collapse; /* Ensures table borders are merged */
+
+  th {
+    background-color: $primary;
+    color: $white;
+    border: 1px solid $primary; /* Border added for th elements */
+    padding: 10px; /* Padding for better alignment */
+    text-align: center;
+    white-space: nowrap; /* Prevents wrapping of text */
+  }
+
+  td {
+    background-color: $offwhite;
+    border: 1px solid $primary; /* Border added for td elements */
+    padding: 10px; /* Padding for better alignment */
+    text-align: center;
+    vertical-align: middle; /* Aligns content vertically */
+  }
+
+  tbody tr:hover {
+    background-color: $light_blue;
+    cursor: pointer;
+  }
+
+  .btn-primary {
+    background-color: $blue;
+    color: $offwhite;
+    border: none;
+    padding: 8px 16px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+  }
+  
+  .btn-primary:hover {
+    background-color: $blue_btn_hover;
+  }
+
+  .btn-secondary {
+    background-color: $primary;
+    color: $offwhite;
+    border: none;
+    padding: 8px 16px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+  }
+  
+  .btn-secondary:hover {
+    background-color: $primary_btn_hover;
+  }
+}

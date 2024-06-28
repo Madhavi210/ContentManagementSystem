@@ -11,8 +11,8 @@ export class ContentService {
   private apiUrl = ' http://localhost:3000/api/content'
   constructor(private http:HttpClient) { }
 
-  getContent(): Observable<IContent[]> {
-    return this.http.get<IContent[]>(this.apiUrl)
+  getContent(): Observable<{content:IContent[], totalCount:number}> {
+    return this.http.get<{content:IContent[], totalCount:number}>(this.apiUrl)
   }
 
   // Create content

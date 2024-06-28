@@ -17,8 +17,8 @@
               <!-- Body Input -->
               <div class="form-group p-2 ">
                 <label for="body" class="mb-2 font-weight-bold">Body</label>
-                <angular-editor formControlName="htmlContent" [config]="config"></angular-editor>
-                  <!-- <textarea id="body" formControlName="body" class="form-control" placeholder="Enter your body"></textarea> -->
+                <!-- <angular-editor id="body" class="form-control" formControlName="htmlContent body" [config]="config"></angular-editor> -->
+                  <textarea id="body" formControlName="body" class="form-control" placeholder="Enter your body"></textarea>
                   <div *ngIf="contentForm.get('body')?.errors && (contentForm.get('body')?.touched || contentForm.get('body')?.dirty)" class="text-danger mt-1">
                     <div *ngIf="contentForm.get('body')?.hasError('required')">Body is required.</div>
                   </div>

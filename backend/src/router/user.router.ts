@@ -24,7 +24,7 @@ export default class UserRouter {
 
         // GET /api/users - Get all users (requires admin authentication)
         // this.router.get("/", Authentication.authUser, Authentication.authAdmin, UserController.getAllUsers);
-        this.router.get("/", UserController.getAllUsers);
+        this.router.get("/", Authentication.authUser,UserController.getAllUsers);
 
         // POST /api/users/login - User login
         this.router.post("/login", UserController.login);

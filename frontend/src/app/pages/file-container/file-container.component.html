@@ -7,8 +7,8 @@
           <div class="card-body">
             <h5 class="card-title">{{ file.title }}</h5>
             <p class="card-text">{{ file.body }}</p>
-            <a [href]="getMediaUrl(file.media.path)" class="card-link" target="_blank">View PDF &nbsp;</a>
-            <button class="btn btnprimary " (click)="downloadFile(file.media.path, file.media.filename)"> Download</button>&nbsp;
+            <a [href]="getMediaUrl(file.media.filename)" class="card-link" target="_blank">View PDF &nbsp;</a>
+            <button class="btn btnprimary " (click)="downloadFile(file.media.path, file.media.filename)" target="_blank"> Download</button>&nbsp;
             <button (click)="onDeleteContent(file._id!)" class="btn btn-delete ">Delete</button>
           </div>
         </div>
@@ -20,12 +20,12 @@
         <div class="row">
           <div *ngFor="let file of imageFiles" class="col-md-6 mb-3">
             <div class="card mediaCard">
-              <img [src]="getMediaUrl(file.media.path)" class="card-img-top" alt="{{ file.title }}">
+              <img [src]="getMediaUrl(file.media.filename)" class="card-img-top" alt="{{ file.title }}">
               <div class="card-body">
                 <h5 class="card-title">{{ file.title }}</h5>
                 <p class="card-text">{{ file.body }}</p>
-                <a [href]="getMediaUrl(file.media.path)" class="card-link" target="_blank">View Image &nbsp;</a>
-                <button class="btn btnprimary" (click)="downloadFile(file.media.path, file.media.filename)">Download</button>&nbsp;
+                <a [href]="getMediaUrl(file.media.filename)" class="card-link" target="_blank">View Image &nbsp;</a>
+                <button class="btn btnprimary" (click)="downloadFile(file.media.path, file.media.filename)" target="_blank">Download</button>&nbsp;
                 <button (click)="onDeleteContent(file._id!)" class="btn btn-delete ">Delete</button>
               </div>
             </div>
@@ -40,11 +40,11 @@
           <div class="card-body">
             <h5 class="card-title">{{ file.title }}</h5>
             <p class="card-text">{{ file.body }}</p>
-            <video *ngIf="isVideo(file.media.mimetype)" [src]="getMediaUrl(file.media.path)" class="card-img-top" controls></video>
-            <audio *ngIf="isAudio(file.media.mimetype)" [src]="getMediaUrl(file.media.path)" controls></audio>
+            <video *ngIf="isVideo(file.media.mimetype)" [src]="getMediaUrl(file.media.filename)" class="card-img-top" controls></video>
+            <audio *ngIf="isAudio(file.media.mimetype)" [src]="getMediaUrl(file.media.filename)" controls></audio>
             <div class="mt-2">
-              <a [href]="getMediaUrl(file.media.path)" class="card-link" target="_blank">View Media &nbsp;</a>
-              <button class="btn btnprimary" (click)="downloadFile(file.media.path, file.media.filename)">Download</button>&nbsp;
+              <a [href]="getMediaUrl(file.media.filename)" class="card-link" target="_blank">View Media &nbsp;</a>
+              <button class="btn btnprimary" (click)="downloadFile(file.media.path, file.media.filename)" target="_blank">Download</button>&nbsp;
               <button (click)="onDeleteContent(file._id!)" class="btn btn-delete ">Delete</button>
             </div>
           </div>

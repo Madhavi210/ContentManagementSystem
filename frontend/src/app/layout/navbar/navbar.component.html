@@ -33,7 +33,7 @@
                     </a>
                 </li>
                 <li class="nav-item" *ngIf="userRole === 'admin'">
-                    <a class="nav-link" routerLink="/manageUser" >
+                    <a class="nav-link" (click)="gotoAdminPage()" >
                     <i class='fas fa-users'></i> Manage-Users
                     </a>
                 </li>

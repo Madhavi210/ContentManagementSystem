@@ -75,10 +75,10 @@ export default class UserClontroller {
         const session = await mongoose.startSession();
         session.startTransaction();
         try {
-            const users = await UserService.getAllUsers(session);
+            const {user, totaluser} = await UserService.getAllUsers(session);
             await session.commitTransaction();
             session.endSession();
-            res.status(StatusCode.OK).json(users);
+            res.status(StatusCode.OK).json({user, totaluser});
         } catch (error) {
             await session.abortTransaction();
             session.endSession();
@@ -91,7 +91,7 @@ export default class UserClontroller {
         await session.startTransaction();
         try {
             const { email, password } = req.body;
-            const user = await UserService.login(email, password, session);
+            const user = await UserService.login(email, password, session);            
             await session.commitTransaction();
             await session.endSession();
             res.status(StatusCode.OK).json({ user });
@@ -107,9 +107,7 @@ export default class UserClontroller {
         await session.startTransaction();
         try {
             const { userId } = req.params;
-            const user = await UserService.logout(userId, session);
-            console.log(user,"logout");
-            
+            const user = await UserService.logout(userId, session);            
             await session.commitTransaction();
             await session.endSession();
             res.status(StatusCode.OK).json({user});

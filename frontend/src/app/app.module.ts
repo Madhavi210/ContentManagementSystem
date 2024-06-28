@@ -22,6 +22,8 @@ import { AngularEditorComponent, AngularEditorModule } from '@kolkov/angular-edi
 import { CreteUserComponent } from './pages/crete-user/crete-user.component';
 import { ActionCellRendererComponent } from './pages/action-cell-renderer/action-cell-renderer.component';
 import { AgGridModule } from 'ag-grid-angular';
+import { CanvasJSAngularChartsModule } from '@canvasjs/angular-charts';
+import { AuthInterceptor } from './authentication/auth.interceptor';
 @NgModule({
   declarations: [
     AppComponent,
@@ -46,9 +48,11 @@ import { AgGridModule } from 'ag-grid-angular';
     HttpClientModule,
     AngularEditorModule,
     AgGridModule,
+    CanvasJSAngularChartsModule,
   ],
   providers: [
-    { provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true }
+    { provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true },
+    {provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true}
   ],
   bootstrap: [AppComponent]
 })

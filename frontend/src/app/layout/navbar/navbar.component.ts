@@ -2,6 +2,7 @@ import { Component, OnInit, AfterViewInit } from '@angular/core';
 import { LoginService } from 'src/app/authentication/login.service';
 import Swal from 'sweetalert2';
 import * as bootstrap from 'bootstrap';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-navbar',
@@ -13,7 +14,7 @@ export class NavbarComponent implements OnInit{
   userRole:string | null = null;
   userId: string | null = null;
 
-  constructor(private loginService:LoginService){}
+  constructor(private loginService:LoginService, private router:Router){}
 
   ngOnInit(): void {
     this.userRole = localStorage.getItem('role');
@@ -42,6 +43,10 @@ export class NavbarComponent implements OnInit{
     dropdownToggleList.forEach(dropdownToggleEl => {
       new bootstrap.Dropdown(dropdownToggleEl);
     });
+  }
+
+  gotoAdminPage(){
+    this.router.navigate(['/manageUser']);
   }
 }
 

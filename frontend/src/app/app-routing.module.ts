@@ -9,15 +9,17 @@ import { CreateContentComponent } from './pages/create-content/create-content.co
 import { authGuardService } from './authentication/auth.guard';
 import { CreteUserComponent } from './pages/crete-user/crete-user.component';
 import { ManageUsersComponent } from './pages/manage-users/manage-users.component';
+import { roleGuard } from './authentication/role.guard';
 
 const routes: Routes = [
   {path:'', redirectTo:'/register', pathMatch:'full' },
   {path:"login", component:LoginComponent},
   {path: 'register', component:RegisterComponent},
   {path:"dashboard", component:DashboardComponent, canActivate:[authGuardService]},
-  {path:'createContent', component:CreateContentComponent,canActivate:[authGuardService]},
-  {path:'createUser', component: CreteUserComponent},
-  {path: 'manageUser', component: ManageUsersComponent},
+  // {path:'createContent', component:CreateContentComponent, canActivate:[authGuardService]},
+  {path:'createContent', component:CreateContentComponent},
+  {path:'createUser', component: CreteUserComponent, canActivate:[authGuardService]},
+  {path: 'manageUser', component: ManageUsersComponent , canActivate:[roleGuard], data:{ expectedRole: 'admin' } },
   {path: '**', component:NotFoundComponent}
 ];
 
@@ -26,3 +28,4 @@ const routes: Routes = [
   exports: [RouterModule]
 })
 export class AppRoutingModule { }
+

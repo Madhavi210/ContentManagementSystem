@@ -67,4 +67,8 @@ export class LoginService {
     this.router.navigate(['/login'])
   }
 
+  getUserRole(){
+    return localStorage.getItem('role');
+  }
+
 }

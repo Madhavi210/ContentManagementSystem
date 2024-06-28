@@ -1,15 +1,55 @@
-<div style="height: 500px;">
-    <ag-grid-angular
-      #agGrid
-      style="width: 100%; height: 100%;"
-      class="ag-theme-alpine"
-      [rowData]="rowData"
-      [defaultColDef]="defaultColDef"
-      ></ag-grid-angular>
-    </div>
-    
-    
-    <!-- [columnDefs]="columnDefs" -->
+<div>
+  <app-navbar></app-navbar>
 
-    <!-- (gridReady)="onGridReady($event)" -->
+  <div class="row">
+    <!-- ********************* -->
+    <div class="col-lg-3">
+      <div style="text-align:center m-2">
+        <h3> Welcome to {{ title }}!</h3>
+      </div>
+      <div>
+        <canvasjs-chart [options]="chartOptions" [styles]="{width: '100%', height:'300px'}"></canvasjs-chart>
+      </div> 
+    </div>
+    <!-- ************************ -->
+    <div class="col-lg-9 p-1">
+      <div class="container-fluid">
+        <h2 class="m-2">User List</h2>
+        <div class="table-responsive"> <!-- Bootstrap class for responsiveness -->
+          <table class="table table-bordered table-hover"> <!-- Bootstrap classes for table -->
+            <thead>
+              <tr>
+                <th>Sr.no</th>
+                <th>User ID</th>
+                <th>Username</th>
+                <th>Email</th>
+                <th>Role</th>
+                <th>CreatedAt</th>
+                <th>UpdatedAt</th>
+                <th>Action</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let user of users">
+                <td>{{ user.srNo }}</td>
+                <td>{{ user._id }}</td>
+                <td>{{ user.username | uppercase }}</td>
+                <td>{{ user.email }}</td>
+                <td>{{ user.role }}</td>
+                <td>{{ user.createdAt | date: 'medium' }}</td>
+                <td>{{ user.updatedAt | date: 'medium' }}</td>
+                <td>
+                  <button class="btn btn-primary" (click)="edituser(user)">Edit</button>&nbsp;
+                  <button class="btn btn-secondary" (click)="deleteUser(user)">Delete</button>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>      
+       <!-- ************************** -->
+    </div>
+  </div>   
   
+</div>
+

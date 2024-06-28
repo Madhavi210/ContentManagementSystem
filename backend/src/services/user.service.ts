@@ -44,7 +44,6 @@ export default class UserService {
             if (!deletedUser) {
                 throw new Error("User not found");
             }
-            console.log("deteted user",deletedUser);
             return deletedUser?.toObject();
     }
 
@@ -57,9 +56,10 @@ export default class UserService {
             return updatedUser ? updatedUser.toObject() : null;
     }
 
-    public static async getAllUsers(session: ClientSession): Promise<IUser[]> {
+    public static async getAllUsers(session: ClientSession): Promise<{user:IUser[], totaluser:number}> {
+            const totaluser = await User.countDocuments();
             const users = await User.find({}).session(session);
-            return users.map(user => user.toObject());
+            return {user: users, totaluser};
     }
 
     public static async login (email:string, password:string,session:ClientSession):Promise<object>{
@@ -86,8 +86,7 @@ export default class UserService {
           const token = await jwt.sign({ id: user._id }, SECRET_KEY, {
             expiresIn: "10h",
           });
-          user.token = token;
-          
+          user.token = token;          
           await user.save({ session });
           return {
             token: user.token,
@@ -97,9 +96,7 @@ export default class UserService {
     }
 
     public static async logout(userId:string, session:ClientSession):Promise<void>{
-        const updatedUser = await User.findByIdAndUpdate(userId, {token:''}, {new: true}).session(session)
-        console.log(updatedUser);  //null
-        
+        const updatedUser = await User.findByIdAndUpdate(userId, {token:''}, {new: true}).session(session)        
         if (!updatedUser) {
           throw new AppError('User not found', 404);
         }

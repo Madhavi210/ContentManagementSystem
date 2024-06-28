@@ -11,8 +11,8 @@ export class UserService {
   private apiUrl = ' http://localhost:3000/api/user'
   constructor(private http:HttpClient) { }
 
-  getUsers(): Observable<IUser[]> {
-    return this.http.get<IUser[]>(this.apiUrl)
+  getUsers(): Observable<{user:IUser[] , totaluser:number}> {
+    return this.http.get<{user:IUser[], totaluser:number}>(this.apiUrl)
   }
 
   getUserById(id:string): Observable<IUser>{
@@ -30,6 +30,6 @@ export class UserService {
   }
 
   deleteUser(id: string): Observable<void> {
-    return this.http.delete<void>(`${this.apiUrl}/${id}`);
+    return this.http.delete<void>(`http://localhost:3000/api/user/${id}`);
   }
 }

@@ -8,7 +8,9 @@ import StatusConstants from "../constant/statusConstant";
 import { IMedia } from "../interface/content.interface";
 import { StatusCode } from "../enum/statusCode";
 import { Express} from "express";
-
+import Content from "../models/content.model";
+import fs from 'fs';
+import path from "path";
 
 export default class ContentController {
   public static async createContent(req: Request, res: Response, next: NextFunction): Promise<void> {
@@ -100,9 +102,28 @@ export default class ContentController {
 
     try {
       await ContentService.deleteContent(contentId, session);
+      const content = await Content.findById(contentId);
+      const filepath = content?.media?.path;
+      
+      if (!filepath) {
+        throw new AppError('File path not found', StatusCode.INTERNAL_SERVER_ERROR);
+      }
+      const fullPath = path.join(__dirname, '..','..', filepath);
+      
+      if (!fs.existsSync(fullPath)) {
+        throw new AppError('File not found for deletion', StatusCode.NOT_FOUND);
+      }
+
+      fs.unlink( fullPath, async (err) =>{
+        if (err) {
+          await session.abortTransaction();
+          session.endSession();
+          return next(new AppError(`Error deleting file ${contentId}: ${err.message} `, StatusCode.INTERNAL_SERVER_ERROR));
+        }
       await session.commitTransaction();
       session.endSession();
       res.status(StatusCode.NO_CONTENT).send();
+    })
     } catch (error) {
       await session.abortTransaction();
       session.endSession();
@@ -110,12 +131,15 @@ export default class ContentController {
     }
   }
 
-  public static async getAllContent(req: Request, res: Response, next: NextFunction): Promise<void> {
+  public static async getAllContent (req: Request, res: Response, next: NextFunction): Promise<void> {
     try {
-      const allContent = await ContentService.getAllContent();
-      res.status(StatusCode.OK).json(allContent);
+      const { content, totalCount } = await ContentService.getAllContent();
+      res.status(200).json({ content, totalCount });
     } catch (error) {
       next(error);
     }
-  }
+  };
+
+
 }
+
