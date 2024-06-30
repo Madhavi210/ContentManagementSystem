@@ -57,7 +57,4 @@ Here are detailed steps and considerations for building a CMS, broken down into 
 Building a CMS in Angular is a challenging but rewarding project.
 It covers a wide range of Angular features and concepts, providing a solid foundation for developing complex web applications.
 
-https://chatgpt.com/share/9f088cd7-c4c2-4b49-87eb-44d469287637
 
-
-https://chatgpt.com/share/a5ea5acb-198e-425d-9c94-07af311bd02b
